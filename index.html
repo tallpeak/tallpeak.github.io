@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>morse code convertor</title>
+        <script crossorigin="anonymous" defer="defer" type="application/javascript" src="morse.js"></script>
+    </head>
+    <body onload="morse_init()">
+        <h1>morse code convertor</h1>
+        
+        <form action="javascript:convert_morse_to_ascii()">
+
+        <p> </p>
+        <label id="input_here">Enter your codes here: 
+            <input type="text" name="input" id="input" value="... --- ...">
+        </label>
+        <label id="output_here">
+            <p id="output" name="output">
+        </label>
+
+        <label id="submit">
+            <input type="submit" value="Convert morse to ascii!">
+        </label>
+
+        </p>
+        </form>
+
+    </body>
+
+</html>
