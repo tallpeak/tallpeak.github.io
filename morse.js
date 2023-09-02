@@ -12,8 +12,7 @@ var morse_to_char = {}
 // function init_reverse() {
 //     ascii = 32
 //     for (let code of morse) {
-//         morse_to_char[code] = String.fromCharCode(ascii);
-//         ascii += 1
+//         morse_to_char[code] = String.fromCharCode(ascii++);
 //     }
 // }
 
@@ -55,7 +54,6 @@ function morse_encode(ascii) {
 }
 
 function convert_morse_to_ascii(e) {
-//    var el_in = document.getElementById("input")
     var el_out = document.getElementById("output")
     el_out.textContent = morse_decode(e.target.value);
 }
@@ -65,13 +63,50 @@ function convert_ascii_to_morse(e) {
     el_out.textContent = morse_encode(e.target.value);
     
 }
-
-// function input_changed(e) { 
-//     var el_out = document.getElementById("output")
-//     el_out.textContent = morse_decode(e.target.value);
-// }
-
+ 
 //morse_init()
 
 //console.log(morse_decode("... --- ...")) // SOS
 
+// play_morse from https://codepen.io/cople/pen/zZLJOz
+var AudioContext = window.AudioContext || window.webkitAudioContext;
+var ctx = new AudioContext();
+var dot = 1.2 / 15;
+
+function play_morse(morse) {
+    var t = ctx.currentTime;
+
+    var oscillator = ctx.createOscillator();
+    oscillator.type = "sine";
+    oscillator.frequency.value = 600;
+
+    var gainNode = ctx.createGain();
+    gainNode.gain.setValueAtTime(0, t);
+
+    morse.split("").forEach(function(letter) {
+        switch(letter) {
+            case ".":
+                gainNode.gain.setValueAtTime(1, t);
+                t += dot;
+                gainNode.gain.setValueAtTime(0, t);
+                t += dot;
+                break;
+            case "-":
+                gainNode.gain.setValueAtTime(1, t);
+                t += 3 * dot;
+                gainNode.gain.setValueAtTime(0, t);
+                t += dot;
+                break;
+            case " ":
+                t += 7 * dot;
+                break;
+        }
+    });
+
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    oscillator.start();
+
+    return false;
+}
