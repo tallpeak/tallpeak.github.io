@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>morse code convertor</title>
+        <style>textarea { word-break: break-all; }</style>
         <script crossorigin="anonymous" defer="defer" type="application/javascript" src="morse.js"></script>
     </head>
     <body onload="morse_init()">
@@ -17,11 +18,14 @@
              placeholder="Enter some Morse code, eg: ... --- ..."></textarea>
             <!-- <input type="text" title="input" name="input" id="input" placeholder="... --- ..." value="... --- ..." /> -->
         </label>
-        
+        <br />
         <label for="output" title="output">
-            <textarea cols="80" rows="10"  name="output" id="output" value="?" title="output" placeholder="[OUTPUT]"></textarea> 
+            <textarea cols="80" rows="10"  name="output" id="output" title="output" 
+             placeholder="[output for Morse codes, or ASCII input]"></textarea> 
             <!-- <input type="text" name="output" id="output" value="?" title="output" placeholder="output" /> -->
         </label>
+
+        <br />
 
         <label for="submit">
             <input type="submit" id="submit" value="Convert morse to ascii!">

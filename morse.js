@@ -38,7 +38,7 @@ function morse_decode(morse) {
     for (let code of morse.split(" ")) {
         if (code.length) {
             let m = morse_to_char[code]
-            if (m) s+=m
+            if (m) s += m
         }
     }
     return s
@@ -48,7 +48,7 @@ function morse_encode(ascii) {
     let s = ""
     for (let ch of ascii.toUpperCase().split("")) {
         if (ch >= ' ' && ch <= String.fromCodePoint(95)) {
-            s += morse[ch.codePointAt(0)-32]
+            s += morse[ch.codePointAt(0)-32] + " "
         }
     }
     return s;
