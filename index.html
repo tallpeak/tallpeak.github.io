@@ -12,15 +12,20 @@
         <form action="javascript:convert_morse_to_ascii()">
 
         <p> </p>
-        <label id="input_here">Enter your codes here: 
-            <input type="text" name="input" id="input" value="... --- ...">
+        <label for="input">Enter morse codes below: <br />
+            <textarea name="input" cols="80" rows="10" id="input"
+             placeholder="Enter some Morse code, eg: ... --- ..." 
+             oninput="javascript:input_changed()"></textarea>
+            <!-- <input type="text" title="input" name="input" id="input" placeholder="... --- ..." value="... --- ..." /> -->
         </label>
-        <label id="output_here">
-            <p id="output" name="output">
+        
+        <label for="output" title="output">
+            <textarea cols="80" rows="10"  name="output" id="output" value="?" title="output" placeholder="[OUTPUT]"></textarea> 
+            <!-- <input type="text" name="output" id="output" value="?" title="output" placeholder="output" /> -->
         </label>
 
-        <label id="submit">
-            <input type="submit" value="Convert morse to ascii!">
+        <label for="submit">
+            <input type="submit" id="submit" value="Convert morse to ascii!">
         </label>
 
         </p>
