@@ -1,5 +1,5 @@
 // ASCII 32 to 95, where "" means undefined
-const morse = [ " ", "-.-.--", ".-..-.", "", "...-..-", "", ".-...", ".----.", "-.--.", "-.--.-",
+const morseCodes = [ "~", "-.-.--", ".-..-.", "", "...-..-", "", ".-...", ".----.", "-.--.", "-.--.-",
                 "", ".-.-.", "--..--", "-....-", ".-.-.-", "-..-.", "-----", ".----", "..---", "...--",
                 "....-", ".....", "-....", "--...", "---..", "----.", "---...", "-.-.-.", "", "-...-",
                 "", "..--..", ".--.-.", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
@@ -21,7 +21,7 @@ function set_morse_to_char(morse, char) {
 }
 
 function morse_init() {
-    morse.forEach(set_morse_to_char)
+    morseCodes.forEach(set_morse_to_char)
 }
 
 const el_in = document.getElementById("input")
@@ -32,6 +32,9 @@ el_out.addEventListener("input", convert_ascii_to_morse)
 function morse_decode(morse) {
     const rx = /[^.-]/g
     morse = morse.replace(rx, " ")
+    // translate multiple spaces to a single space:
+    const rx2 = / {2,}/g
+    morse = morse.replace(rx2," ~ ")
 
     let s = ""
     for (let code of morse.split(" ")) {
@@ -47,7 +50,7 @@ function morse_encode(ascii) {
     let s = ""
     for (let ch of ascii.toUpperCase().split("")) {
         if (ch >= ' ' && ch <= String.fromCodePoint(95)) {
-            s += morse[ch.codePointAt(0)-32] + " "
+            s += morseCodes[ch.codePointAt(0)-32] + " "
         }
     }
     return s;
