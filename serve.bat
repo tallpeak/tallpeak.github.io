@@ -1,7 +1,7 @@
 @echo off
 echo This starts a debug server
 echo The start command asynchronously starts your default web browser
-echo Note Port 7767 = MC (ASCII codes), for Morse Code
+echo Note Port 7767 chosen because M,C in ASCII = 77,67 (and MC="Morse Code")
 start "debug browser" "http://localhost:7767"
 python -m http.server 7767
 : or npx http-server -c-1

@@ -1,5 +1,5 @@
 // ASCII 32 to 95, where "" means undefined
-const morseCodes = [ "~", "-.-.--", ".-..-.", "", "...-..-", "", ".-...", ".----.", "-.--.", "-.--.-",
+const morseCodes = [ String.fromCharCode(128 + 32 ), "-.-.--", ".-..-.", "", "...-..-", "", ".-...", ".----.", "-.--.", "-.--.-",
                 "", ".-.-.", "--..--", "-....-", ".-.-.-", "-..-.", "-----", ".----", "..---", "...--",
                 "....-", ".....", "-....", "--...", "---..", "----.", "---...", "-.-.-.", "", "-...-",
                 "", "..--..", ".--.-.", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
@@ -30,11 +30,12 @@ el_in.addEventListener("input", convert_morse_to_ascii)
 el_out.addEventListener("input", convert_ascii_to_morse)
 
 function morse_decode(morse) {
+    // translate non-symbol characters to spaces
     const rx = /[^.-]/g
     morse = morse.replace(rx, " ")
     // translate multiple spaces to a single space:
-    const rx2 = / {2,}/g
-    morse = morse.replace(rx2," ~ ")
+    const spaces = / +/g
+    morse = morse.replace(spaces," ~ ")
 
     let s = ""
     for (let code of morse.split(" ")) {
@@ -58,12 +59,12 @@ function morse_encode(ascii) {
 
 function convert_morse_to_ascii(e) {
     var el_out = document.getElementById("output")
-    el_out.textContent = morse_decode(e.target.value);
+    el_out.value = morse_decode(e.target.value);
 }
 
 function convert_ascii_to_morse(e) {
     var el_out = document.getElementById("input")
-    el_out.textContent = morse_encode(e.target.value);
+    el_out.value = morse_encode(e.target.value);
     
 }
  
@@ -72,11 +73,12 @@ function convert_ascii_to_morse(e) {
 //console.log(morse_decode("... --- ...")) // SOS
 
 // play_morse from https://codepen.io/cople/pen/zZLJOz
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-var ctx = new AudioContext();
-var dot = 1.2 / 15;
 
-function play_morse(morse) {
+function play_morse(morse, dot_length) {
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    var ctx = new AudioContext();
+    var dot = dot_length * 0.001 || 1.2 / 15;
+
     var t = ctx.currentTime;
 
     var oscillator = ctx.createOscillator();

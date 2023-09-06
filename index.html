@@ -11,7 +11,7 @@
     <body onload="morse_init()">
         <h1>morse code convertor</h1>
         
-        <form action="javascript:play_morse(el_in.value)">
+        <form action="javascript:play_morse(el_in.value, dot_length.value)">
 
         <p> </p>
         <label for="input">Enter morse codes below: <br />
@@ -23,7 +23,12 @@
         <label for="output" title="output">
             <textarea cols="80" rows="10"  name="output" id="output" title="output" 
              placeholder="[output for Morse codes, or ASCII input]"></textarea> 
-           
+        </label>
+
+        <br />
+        Dot length: <label for="dot_length" title="dot length (ms)">
+            <input type="text" name="dot_length" id="dot_length" value="80"  title="dot_length" 
+             placeholder="ms"  maxlength="6" size="4" /> milliseconds
         </label>
 
         <br />
