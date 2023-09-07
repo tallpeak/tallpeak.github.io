@@ -26,9 +26,6 @@
         }
 
         #outergrid {
-            /* grid-auto-flow: row; */
-            /* grid-template: repeat(1, 1fr) / repeat(2, 1fr);  */
-            /* gap: 10px; */
             grid-template-columns: 2;
             grid-template-rows: 1;
             display: flex;
@@ -48,9 +45,7 @@
             font-style: normal;
             display: grid;
             gap: 2px;
-            /* grid-template-rows: 16; */
-            /* grid-template-columns: 4; */
-            grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+            grid-template: repeat(9, 1fr) / repeat(6, 1fr);
             grid-auto-flow: column;
         }
 
@@ -78,7 +73,7 @@
 
             <form action="javascript:play_morse(el_in.value, dot_length.value)">
 
-                <p> </p>
+    
                 <label for="input">Enter morse codes below: <br />
                     <textarea name="input" cols="40" rows="6" id="input"
                         placeholder="[Enter some Morse code, eg: ... --- ...]"></textarea>
@@ -111,41 +106,20 @@
                 <img src="qr.png" alt="QR"/>
                 </label>
             </p>
-
         </div>
+
         <div id="ogright">
-            <br />
-            <br />
-
             <div id="grid">
-                <!-- <div class="letterMorse">S ...</div>
-            <div class="letterMorse">O ---</div> -->
             </div>
-
         </div>
     </div>
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    
     <div id="links">
-        <h2> Some other implementations (console programs; no sound) </h2>
-
-        <p>Perl: &nbsp; &nbsp; &nbsp; <a
-                href="https://gist.github.com/tallpeak/eb8f20f91ff326631111d9530d2e75fb">https://gist.github.com/tallpeak/eb8f20f91ff326631111d9530d2e75fb</a>
+        <p> Also:  
+            <a href="https://gist.github.com/tallpeak/eb8f20f91ff326631111d9530d2e75fb">Perl</a>
+            <a href="https://gist.github.com/tallpeak/e82af53262aa213bfd8455ee793bcdf4">Python</a>
+            <a href="https://gist.github.com/tallpeak/7d1af948a02489e0889baeaa6879b0d6">Rust</a>
         </p>
-        <p>Python: &nbsp; <a
-                href="https://gist.github.com/tallpeak/e82af53262aa213bfd8455ee793bcdf4">https://gist.github.com/tallpeak/e82af53262aa213bfd8455ee793bcdf4</a>
-        </p>
-        <p>Rust: &nbsp; &nbsp; <a
-                href="https://gist.github.com/tallpeak/7d1af948a02489e0889baeaa6879b0d6">https://gist.github.com/tallpeak/7d1af948a02489e0889baeaa6879b0d6</a>
-        </p>
-
-
     </div>
 
 </body>
