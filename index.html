@@ -9,6 +9,20 @@
     <style>
         textarea {
             word-break: break-all;
+            width:90%;
+            max-width:90%;
+            max-height:40%;
+        }
+
+        @media screen and (max-width: 760px) {
+            #ogleft { width: 200px;}
+        }
+        @media screen and (min-width: 760px) {
+            #ogleft { width: 350px;}
+        }
+
+        textarea {
+            word-break: break-all;
         }
 
         #outergrid {
@@ -122,6 +136,8 @@
         <p>Rust: &nbsp; &nbsp; <a
                 href="https://gist.github.com/tallpeak/7d1af948a02489e0889baeaa6879b0d6">https://gist.github.com/tallpeak/7d1af948a02489e0889baeaa6879b0d6</a>
         </p>
+
+        QR: <img src="qr.png"/>
 
     </div>
 
