@@ -1,11 +1,11 @@
 // ASCII 32 to 95, where "" means undefined
-const morseCodes = [ String.fromCharCode(128 + 32 ), "-.-.--", ".-..-.", "", "...-..-", "", ".-...", ".----.", "-.--.", "-.--.-",
-                "", ".-.-.", "--..--", "-....-", ".-.-.-", "-..-.", "-----", ".----", "..---", "...--",
-                "....-", ".....", "-....", "--...", "---..", "----.", "---...", "-.-.-.", "", "-...-",
-                "", "..--..", ".--.-.", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
-                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
-                ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", "",
-                "", "", "", "..--.-" ]
+const morseCodes = [String.fromCharCode(128 + 32), "-.-.--", ".-..-.", "", "...-..-", "", ".-...", ".----.", "-.--.", "-.--.-",
+    "", ".-.-.", "--..--", "-....-", ".-.-.-", "-..-.", "-----", ".----", "..---", "...--",
+    "....-", ".....", "-....", "--...", "---..", "----.", "---...", "-.-.-.", "", "-...-",
+    "", "..--..", ".--.-.", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+    "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
+    ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", "",
+    "", "", "", "..--.-"]
 
 var morse_to_char = {}
 
@@ -20,8 +20,21 @@ function set_morse_to_char(morse, char) {
     morse_to_char[morse] = String.fromCharCode(char + 32)
 }
 
+function add_to_help_grid(morse, char) {
+    let ch = char + 32
+    if (morse && ch > 32) {
+        let grd = document.getElementById("grid")
+        let nod = document.createElement("div")
+        nod.innerHTML = String.fromCharCode(ch) + " &nbsp; " + morse
+        nod.id = "lm" + ch
+        nod.className = "letterMorse"
+        grd.append(nod)
+    }
+}
+
 function morse_init() {
     morseCodes.forEach(set_morse_to_char)
+    morseCodes.forEach(add_to_help_grid)
 }
 
 const el_in = document.getElementById("input")
@@ -35,7 +48,7 @@ function morse_decode(morse) {
     morse = morse.replace(rx, " ")
     // translate multiple spaces to a single space:
     const spaces = / +/g
-    morse = morse.replace(spaces," ~ ")
+    morse = morse.replace(spaces, " ~ ")
 
     let s = ""
     for (let code of morse.split(" ")) {
@@ -51,7 +64,7 @@ function morse_encode(ascii) {
     let s = ""
     for (let ch of ascii.toUpperCase().split("")) {
         if (ch >= ' ' && ch <= String.fromCodePoint(95)) {
-            s += morseCodes[ch.codePointAt(0)-32] + " "
+            s += morseCodes[ch.codePointAt(0) - 32] + " "
         }
     }
     return s;
@@ -65,9 +78,9 @@ function convert_morse_to_ascii(e) {
 function convert_ascii_to_morse(e) {
     var el_out = document.getElementById("input")
     el_out.value = morse_encode(e.target.value);
-    
+
 }
- 
+
 //morse_init()
 
 //console.log(morse_decode("... --- ...")) // SOS
@@ -88,8 +101,8 @@ function play_morse(morse, dot_length) {
     var gainNode = ctx.createGain();
     gainNode.gain.setValueAtTime(0, t);
 
-    morse.split("").forEach(function(letter) {
-        switch(letter) {
+    morse.split("").forEach(function (letter) {
+        switch (letter) {
             case ".":
                 gainNode.gain.setValueAtTime(1, t);
                 t += dot;
