@@ -25,7 +25,30 @@ function add_to_help_grid(morse, char) {
     if (morse && ch > 32) {
         let grd = document.getElementById("grid")
         let nod = document.createElement("div")
-        nod.innerHTML = String.fromCharCode(ch) + " &nbsp; " + morse
+        
+        // var span = document.createElement('span')
+        // span.innerHTML = ''
+        let s = ""
+        morse.split('').forEach(function (elem) {
+            // var newSpan = document.createElement('span')
+            // newSpan.style.color = elem == "." ? "blue" : "red"
+            // newSpan.style.fontSize = '18px'
+            // newSpan.innerHTML = elem
+            // span.appendChild(newSpan)
+            s += '<span style="color: ' + (elem == "." ? "blue" : "red") 
+                + '; font-size: 18px; margin-left: 1px;">' + elem + '</span>'
+        })
+        //console.log(s)
+        let c = String.fromCharCode(ch)
+        nod.innerHTML = '<span style="color: black; font-size: 18px; font-weight: bold;">' 
+            + c + "</span>"
+            + '<span style="display: inline-block; margin-left:' 
+            + ("@&$W".indexOf(c) > -1 ? 3 : 12) + 'px;">' // some wide characters 
+            + s + "</span>" 
+            // span.innerHTML //+ morse
+        //console.log(nod.innerHTML)
+
+
         nod.id = "lm" + ch
         nod.className = "letterMorse"
         grd.append(nod)
