@@ -25,33 +25,49 @@ function add_to_help_grid(morse, char) {
     if (morse && ch > 32) {
         let grd = document.getElementById("grid")
         let nod = document.createElement("div")
-        
+
+        // approach 1) original example built DOM elements,
+        // but I had to convert back to a string 
+        // when assigning to innerHTML, so why?
         // var span = document.createElement('span')
         // span.innerHTML = ''
         let s = ""
         morse.split('').forEach(function (elem) {
+            // 1)
             // var newSpan = document.createElement('span')
             // newSpan.style.color = elem == "." ? "blue" : "red"
             // newSpan.style.fontSize = '18px'
             // newSpan.innerHTML = elem
             // span.appendChild(newSpan)
-            s += '<span style="color: ' + (elem == "." ? "blue" : "red") 
-                + '; font-size: 18px; margin-left: 1px;">' + elem + '</span>'
+
+            // approach 2) using inline styles in a span element:
+            // s += '<span style="color: ' + (elem == "." ? "blue" : "red") 
+            //     + '; font-size: 18px; margin-left: 1px;">' + elem + '</span>'
+
+            // approach 3) let's use custom elements:
+            if (elem == ".") {
+                s += "<c-b>" + elem + "</c-b>" // blue
+            } else {
+                s += "<c-r>" + elem + "</c-r>" // red
+            }
         })
         //console.log(s)
         let c = String.fromCharCode(ch)
-        nod.innerHTML = '<span style="color: black; font-size: 18px; font-weight: bold;">' 
-            + c + "</span>"
-            + '<span style="display: inline-block; margin-left:' 
-            + ("@&$W".indexOf(c) > -1 ? 3 : 12) + 'px;">' // some wide characters 
-            + s + "</span>" 
-            // span.innerHTML //+ morse
-        //console.log(nod.innerHTML)
+        // nod.innerHTML = '<span style="color: black; font-size: 18px; font-weight: bold;">' 
+        //     + c + "</span>"
+        //     + '<span style="display: inline-block; margin-left:' 
+        //     + ("@&$W".indexOf(c) > -1 ? 3 : 12) + 'px;">' // some wide characters 
+        //     + s + "</span>" 
+        //     // span.innerHTML //+ morse
+        // //console.log(nod.innerHTML)
 
-
-        nod.id = "lm" + ch
-        nod.className = "letterMorse"
+        // 3 pixels margin for wide characters
+        nod.innerHTML = "<s-ch>" + c + "</s-ch>" + 
+                ("@&$W".indexOf(c) > -1 ? "<m-3>" + s + "</m-3>" : "<m-12>" + s + "</m-12>")  
+        //nod.id = "lm" + ch
+        nod.className = "hcel"
         grd.append(nod)
+        grd.append("\n") // to make the html more readable (without running "format" in vs code)
     }
 }
 
